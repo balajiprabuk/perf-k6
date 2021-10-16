@@ -1,0 +1,23 @@
+1. Give intro about the topics covered in the talk - 5 mins
+(We will limit ourselves to running the scripts on local it can be either direct CLI or through docker)
+2. Give intro about the API that will be used for testing during this talk
+3. start with sample-code, demo of running the code
+4. explain the concept covered in the code with a walkthrough of the sample-code
+
+
+
+Topics:
+    What is k6
+    http requests --> Any 2 priority request 
+    Perform Oauth (Optional, can be picked up if time permits)
+    Data parameterization and dynamic data generation
+    generate UUID  (Optional, can be picked up if time permits)
+    faker library with k6 (Optional, can be picked up if time permits)
+    checks and threshold 
+    Tags and grouping
+    set and get environment variables
+    test life cycle
+    scenarios --> any two types
+    custom metrics
+    reporting using k6 jslib
+

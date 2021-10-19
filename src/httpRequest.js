@@ -21,3 +21,5 @@ export default function () {
   // returns a Response object 
   console.log(response.status)
 }
+
+// k6 run httpRequest.js || k6 run httpRequest.js --iterations=6 --vus=2

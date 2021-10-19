@@ -1,0 +1,23 @@
+{
+  "name": "perf-k6",
+  "version": "1.0.0",
+  "description": "We will use this repo for k6 demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balajiprabuk/perf-k6.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/balajiprabuk/perf-k6/issues"
+  },
+  "homepage": "https://github.com/balajiprabuk/perf-k6#readme",
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "faker": "^5.5.3"
+  }
+}

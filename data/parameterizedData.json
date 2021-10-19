@@ -1,0 +1,46 @@
+{
+  "users": [
+    {
+      "username": "demovodQA1",
+      "first_name": "demo",
+      "last_name": "user",
+      "email": "demovodQA1@tester.com",
+      "password": "tester"
+    },
+    {
+      "username": "demovodQA2",
+      "first_name": "test",
+      "last_name": "user",
+      "email": "demovodQA2@tester.com",
+      "password": "tester"
+    },
+    {
+      "username": "demovodQA3",
+      "first_name": "test",
+      "last_name": "user",
+      "email": "demovodQA3@tester.com",
+      "password": "tester"
+    },
+    {
+      "username": "demovodQA4",
+      "first_name": "test",
+      "last_name": "user",
+      "email": "demovodQA4@tester.com",
+      "password": "tester"
+    },
+    {
+      "username": "demovodQA5",
+      "first_name": "test",
+      "last_name": "user",
+      "email": "demovodQA5@tester.com",
+      "password": "tester"
+    },
+    {
+      "username": "demovodQA6",
+      "first_name": "demo",
+      "last_name": "user",
+      "email": "demovodQA6@tester.com",
+      "password": "tester"
+    }
+  ]
+}

@@ -1,31 +1,29 @@
-
 import http from "k6/http";
 import faker from "../modules/faker.js";
-import { SharedArray } from "k6/data";
-import { group } from "k6";
-import { Trend } from "k6/metrics";
-
-let registerTrendObject = new Trend("http_req_duration_registration");
-let loginTrendObject = new Trend("http_req_duration_login");
-
-const data = new SharedArray("user details for registration", function () {
-  return JSON.parse(open("../../perf-k6/data/parameterizedData.json")).users;
-});
+import { check, group } from "k6";
 
 export let options = {
   scenarios: {
-    user_scenario: {
-      // name of the executor to use
+    login_crocodile_shared: {
       executor: "shared-iterations",
-      // executor-specific configuration
-      vus: 10,
+      vus: 2,
       iterations: 10,
+      maxDuration: "10s",
+    },
+    login_crocodile_ramp: {
+      executor: 'ramping-vus',
+      startVUs: 0,
+      startTime: '11s',
+      stages: [
+        { duration: '5s', target: 10 },
+        { duration: '5s', target: 0 },
+      ],
     },
   },
 };
 
-export default function () {
-  let username, password;
+export function setup() {
+  let username, password, authToken;
   group("User registration", function () {
     username = faker.internet.userName();
     password = faker.internet.password();
@@ -39,17 +37,45 @@ export default function () {
       email: faker.internet.email(),
     };
     let response = http.post(url, JSON.stringify(payload), params);
-    registerTrendObject.add(response.timings.duration);
+    check(response, {
+      "User registration response code should be 201": (res) =>
+        response.status == 201,
+    });
   });
 
   group("Login User", function () {
-    const url = "https://test-api.k6.io/auth/basic/login/";
+    const url = "https://test-api.k6.io/auth/token/login/";
     const payload = {
       username: username,
       password: password,
     };
-    const params = { headers: { "Content-Type": "application/json" } };
-    let response = http.post(url, JSON.stringify(payload), params);
-    loginTrendObject.add(response.timings.duration);
+    let response = http.post(url, JSON.stringify(payload), {
+      headers: { "Content-Type": "application/json" },
+    });
+    authToken = JSON.parse(response.body).access;
+    check(authToken, { "logged in successfully": () => authToken !== "" });
   });
+  return authToken;
+}
+
+export default function (authToken) {
+  group("Create a new crocodile", function () {
+    const url = "https://test-api.k6.io/my/crocodiles/";
+    const payload = {
+      name: faker.name.findName(),
+      sex: "M",
+      date_of_birth: "2001-01-01",
+    };
+    const params = {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    };
+    const res = http.post(url, payload, params);
+    check(res, { "Created crocodile successfully": () => res.status == 201 });
+  });
+}
+
+export function teardown(data) {
+  group("Perform resource cleanups steps", function () {});
 }

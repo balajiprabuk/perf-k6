@@ -1,24 +1,27 @@
 import http from "k6/http";
 import faker from "../modules/faker.js";
 import { check, group } from "k6";
+import { Trend } from "k6/metrics";
 
+const BASE_URL = "https://test-api.k6.io";
+let loginCrocodileTrend = new Trend("http_req_duration_login_crocodile");
 export let options = {};
 
 export function setup() {
-  let username, password, authToken;
+  let username = faker.internet.userName();
+  let password = faker.internet.password();
+  let authToken;
   group("User registration", function () {
-    username = faker.internet.userName();
-    password = faker.internet.password();
-    const url = "https://test-api.k6.io/user/register/";
-    const params = { headers: { "Content-Type": "application/json" } };
-    const payload = {
+    const URL = `${BASE_URL}/user/register/`;
+    const PARAMS = { headers: { "Content-Type": "application/json" } };
+    const PAYLOAD = {
       username: username,
       password: password,
       first_name: faker.name.firstName(),
       last_name: faker.name.firstName(),
       email: faker.internet.email(),
     };
-    let response = http.post(url, JSON.stringify(payload), params);
+    let response = http.post(URL, JSON.stringify(PAYLOAD), PARAMS);
     check(response, {
       "User registration response code should be 201": (res) =>
         response.status == 201,
@@ -26,12 +29,12 @@ export function setup() {
   });
 
   group("Login User", function () {
-    const url = "https://test-api.k6.io/auth/token/login/";
-    const payload = {
+    const URL = `${BASE_URL}/auth/token/login/`;
+    const PAYLOAD = {
       username: username,
       password: password,
     };
-    let response = http.post(url, JSON.stringify(payload), {
+    let response = http.post(URL, JSON.stringify(PAYLOAD), {
       headers: { "Content-Type": "application/json" },
     });
     authToken = JSON.parse(response.body).access;
@@ -42,22 +45,23 @@ export function setup() {
 
 export default function (authToken) {
   group("Create a new crocodile", function () {
-    const url = "https://test-api.k6.io/my/crocodiles/";
-    const payload = {
+    const URL = `${BASE_URL}/my/crocodiles/`;
+    const PAYLOAD = {
       name: faker.name.findName(),
       sex: "M",
       date_of_birth: "2001-01-01",
     };
-    const params = {
+    const PARAMS = {
       headers: {
         Authorization: `Bearer ${authToken}`,
       },
     };
-    const res = http.post(url, payload, params);
-    check(res, { "Created crocodile successfully": () => res.status == 201 });
+    let response = http.post(URL, PAYLOAD, PARAMS);
+    loginCrocodileTrend.add(response.timings.duration)
+    check(response, { "Created crocodile successfully": () => response.status == 201 });
   });
 }
 
-export function teardown(data) {
+export function teardown(authToken) {
   group("Perform resource cleanups steps", function () {});
 }

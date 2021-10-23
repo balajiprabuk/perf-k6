@@ -27,7 +27,6 @@ export function setup() {
     headers: { "Content-Type": "application/json" },
   });
   const authToken = JSON.parse(response.body).access;
-  console.log(authToken)
   return authToken;
 }
 

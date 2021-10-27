@@ -26,3 +26,6 @@ export default function () {
   //All repsonse are 201 because of unique data passed in payload
 }
 
+
+//  npm install browserify faker
+// ./node_modules/.bin/browserify ./node_modules/faker/ -s faker > faker.js 

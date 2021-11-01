@@ -19,11 +19,10 @@ export default function () {
   };
   let response = http.post(URL, JSON.stringify(PAYLOAD), PARAMS);
   check(response, {
-    "response code was 201": (res) => res.status === 201,
+    "response code was 201": (res) => res.status === 200,
   });
-  //value - Value to test
+  //value - value to test
   //sets - assertion condition to perform against value
   //tags - tags to attach in metrics
-
-  // k6 run --vus 1 --iterations 3  4_checks.js
 }
+// k6 run --vus 1 --iterations 5  4_checks.js

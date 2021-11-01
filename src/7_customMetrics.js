@@ -17,7 +17,7 @@ const BASE_URL = "https://test-api.k6.io";
 
 export let options = {
   vus: 1,
-  iterations: 1,
+  iterations: 5,
   thresholds: {
     custom_registration: [" p(95)<200"],
     custom_login: ["p(95)<200"],

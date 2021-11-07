@@ -9,8 +9,8 @@ import { Trend } from "k6/metrics";
 //Rate - Stores the percentage value added to it
 //Trend - Stores statistics like min,max,average and percentiles value added it to
 
-let registerTrendObject = new Trend("");
-let loginTrendObject = new Trend("custom_login");
+let registerTrendObject = new Trend("custom_metrics_register");
+let loginTrendObject = new Trend("custom_metrics_login");
 //creating custom metrics object
 
 const BASE_URL = "https://test-api.k6.io";
@@ -19,8 +19,8 @@ export let options = {
   vus: 1,
   iterations: 5,
   thresholds: {
-    custom_registration: [" p(95)<200"],
-    custom_login: ["p(95)<200"],
+    custom_metrics_register: ["p(95)<200"],
+    custom_metrics_login: ["p(95)<200"],
   },
 };
 
@@ -43,10 +43,14 @@ export default function () {
       response.timings.sending + response.timings.receiving
     );
 
-    check(response, {
-      "User registration response code should be 201": (res) =>
-        response.status == 201,
-    });
+    check(
+      response,
+      {
+        "User registration response code should be 201": (res) =>
+          response.status == 201,
+      },
+      { Tag: "RegisterUser" }
+    );
   });
 
   group("Login User", function () {
@@ -61,9 +65,13 @@ export default function () {
 
     loginTrendObject.add(response.timings.sending + response.timings.receiving);
 
-    check(response, {
-      "login code should be 200": (res) => response.status == 200,
-    });
+    check(
+      response,
+      {
+        "login code should be 200": (res) => response.status == 200,
+      },
+      { Tag: "LoginUser" }
+    );
   });
 }
 //k6 run 7_customMetrics.js

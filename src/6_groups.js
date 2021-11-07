@@ -49,5 +49,4 @@ export default function () {
   });
 }
 
-//k6 run 6_groups.js --out json=report.json
-//https://k6.io/docs/static/8f2d63ba57dc704583eb43305650a743/a2c06/cloud-insights-http-tab.png
+//k6 run 6_groups.js 

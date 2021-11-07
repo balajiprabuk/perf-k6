@@ -13,7 +13,6 @@ const BASE_URL = "https://test-api.k6.io";
 
 export const options = {
   //Options allow you to configure how k6 should behave during test execution.
-
   vus: 1,
   iterations: 5,
   thresholds: {

@@ -9,8 +9,8 @@ export default function () {
   const URL = `${BASE_URL}/user/register/`;
   const PARAMS = { headers: { 'Content-Type': 'application/json' } };
   
-  //Using faker library generating random data at run time for all the iterations.This ensures dynamic data passed
-  //at run time for our payload 
+  //Using faker library generating random data at run time for all the iterations.This ensures realistic dynamic fake data passed
+  //at run time for our payload
 
   const PAYLOAD = {
     username: faker.internet.userName(),
@@ -20,12 +20,14 @@ export default function () {
     password: faker.internet.password(),
   };
 
+  console.log("User name: "+ PAYLOAD.username + " * First name: " + PAYLOAD.first_name + " * Email: " + PAYLOAD.email + " * Password: " + PAYLOAD.password)
 
   let response = http.post(URL,JSON.stringify(PAYLOAD),PARAMS)
   console.log('response code is :', response.status)
   //All repsonse are 201 because of unique data passed in payload
 }
 
+// k6 run src/3_dynamicData.js --iterations 3
 
 //  npm install browserify faker
 // ./node_modules/.bin/browserify ./node_modules/faker/ -s faker > faker.js 

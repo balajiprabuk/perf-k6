@@ -1,45 +1,45 @@
 {
   "users": [
     {
-      "username": "demovodQA1",
+      "username": "demouser1",
       "first_name": "demo",
       "last_name": "user",
-      "email": "demovodQA1@tester.com",
+      "email": "demouser1@tester.com",
       "password": "tester"
     },
     {
-      "username": "demovodQA2",
+      "username": "demouser2",
       "first_name": "test",
       "last_name": "user",
-      "email": "demovodQA2@tester.com",
+      "email": "demouser2@tester.com",
       "password": "tester"
     },
     {
-      "username": "demovodQA3",
+      "username": "demouser3",
       "first_name": "test",
       "last_name": "user",
-      "email": "demovodQA3@tester.com",
+      "email": "demouser3@tester.com",
       "password": "tester"
     },
     {
-      "username": "demovodQA4",
+      "username": "demouser4",
       "first_name": "test",
       "last_name": "user",
-      "email": "demovodQA4@tester.com",
+      "email": "demouser4@tester.com",
       "password": "tester"
     },
     {
-      "username": "demovodQA5",
+      "username": "demouser5",
       "first_name": "test",
       "last_name": "user",
-      "email": "demovodQA5@tester.com",
+      "email": "demouser5@tester.com",
       "password": "tester"
     },
     {
-      "username": "demovodQA6",
+      "username": "demouser6",
       "first_name": "demo",
       "last_name": "user",
-      "email": "demovodQA6@tester.com",
+      "email": "demouser6@tester.com",
       "password": "tester"
     }
   ]

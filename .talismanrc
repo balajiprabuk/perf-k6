@@ -1,4 +1,6 @@
 fileignoreconfig:
 - filename: package-lock.json
   checksum: 7ccf07c5b84827ffc5887f70d3b851946c81284a977f7782a57455bf2ad4c40c
+- filename: src/3_dynamicData.js
+  checksum: 967999cd6814ce954cddfe061f11184e80a88a9d99aeac234deb0881b7853de7
 version: "1.0"

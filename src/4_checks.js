@@ -19,7 +19,7 @@ export default function () {
   };
   let response = http.post(URL, JSON.stringify(PAYLOAD), PARAMS);
   check(response, {
-    "response code was 201": (res) => res.status === 200,
+    "response code was 201": (res) => res.status === 201,
   });
   //value - value to test
   //sets - assertion condition to perform against value

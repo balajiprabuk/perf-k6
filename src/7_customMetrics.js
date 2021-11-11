@@ -13,6 +13,10 @@ let registerTrendObject = new Trend("custom_metrics_register");
 let loginTrendObject = new Trend("custom_metrics_login");
 //creating custom metrics object
 
+
+
+// to add it in must to have 
+
 const BASE_URL = "https://test-api.k6.io";
 
 export let options = {

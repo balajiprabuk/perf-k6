@@ -16,6 +16,7 @@ export let options = {
     http_req_duration: ["p(95)<500"], // 95% of requests should be below 200ms
   },
 };
+// after scenarios 
 
 export default function () {
   let username = faker.internet.userName();

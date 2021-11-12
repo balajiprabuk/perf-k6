@@ -4,6 +4,7 @@ import { sleep } from 'k6';
 export default function () {
   sleep(0.5)
   console.log('Iteration number :', __ITER);
+  //__ITER is predefined k6 environment variable which stores the iteration index 
 }
 
 // k6 run src/0_runningk6.js 

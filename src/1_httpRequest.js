@@ -2,9 +2,6 @@
 import http from 'k6/http';
 // importing http module that contains functionality for performing HTTP transactions
 
-import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
-import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
-
 const BASE_URL = 'https://test-api.k6.io';
 
 //k6 entry point
@@ -21,13 +18,6 @@ export default function () {
 
 // k6 run src/1_httpRequest.js
 
-// k6 will call handleSummary method at the end of the test run
-export function handleSummary(data) {
-  return {
-    "./results/result.html": htmlReport(data),
-    stdout: textSummary(data, { indent: " ", enableColors: true }),
-  };
-}
 
 const my_methods = {
   
@@ -63,3 +53,15 @@ const my_methods = {
     console.log('response code is :', responses[0].status);
   }
 }
+
+// import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
+// import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
+
+
+// // k6 will call handleSummary method at the end of the test run
+// export function handleSummary(data) {
+//   return {
+//     "./results/result.html": htmlReport(data),
+//     stdout: textSummary(data, { indent: " ", enableColors: true }) + "\n",
+//   };
+// }

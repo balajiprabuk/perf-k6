@@ -3,6 +3,7 @@ import { sleep } from 'k6';
 //k6 entry point - similar to main() method for java
 export default function () {
   sleep(0.5)
+  console.log('Iteration number :', __ITER);
 }
 
 // k6 run src/0_runningk6.js 

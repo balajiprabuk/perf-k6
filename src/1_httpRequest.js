@@ -21,6 +21,7 @@ export default function () {
 
 // k6 run src/1_httpRequest.js
 
+// k6 will call handleSummary method at the end of the test run
 export function handleSummary(data) {
   return {
     "./results/result.html": htmlReport(data),

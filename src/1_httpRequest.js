@@ -1,5 +1,5 @@
 'use strict';
-import http, { batch } from 'k6/http';
+import http from 'k6/http';
 // importing http module that contains functionality for performing HTTP transactions
 
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
@@ -24,7 +24,7 @@ export default function () {
 export function handleSummary(data) {
   return {
     "./results/result.html": htmlReport(data),
-    // stdout: textSummary(data, { indent: " ", enableColors: true }),
+    stdout: textSummary(data, { indent: " ", enableColors: true }),
   };
 }
 

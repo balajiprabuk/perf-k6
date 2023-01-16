@@ -18,7 +18,9 @@
   "homepage": "https://github.com/balajiprabuk/perf-k6#readme",
   "dependencies": {
     "browserify": "^17.0.0",
-    "faker": "^5.5.3"
+    "faker": "^5.5.3",
+      "influx": "^5.9.0"
+    
   },
   "keywords": [],
   "devDependencies": {

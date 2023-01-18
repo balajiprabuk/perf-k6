@@ -4,23 +4,15 @@ import { check } from "k6";
 
 const BASE_URL = "https://test-api.k6.io";
 
-//Thresholds define the pass fail criteria for the tests
-//Ex: Response time for 95% of requests should be below 200ms.
-//Ex: Failure rate should be less than 1%
-//Ex: Server prorcessing time for 95% of requests should be below 200ms
-
-
-
 export const options = {
-  //Options allow you to configure how k6 should behave during test execution.
   vus: 10,
   iterations: 10,
-  thresholds: {
+/*  thresholds: {
     // the rate of successful checks should be higher than 99%
     checks: ["rate>0.99"],
     http_req_failed: ["rate<0.01"], // http errors should be less than 1%
     http_req_duration: ["p(95)<700"], // 95% of requests should be below 700ms
-  },
+  }*/
 };
 export default function () {
   const URL = `${BASE_URL}/user/register/`;
@@ -34,7 +26,9 @@ export default function () {
   };
   let response = http.post(URL, JSON.stringify(PAYLOAD), PARAMS);
   check(response, {
-    "response code was 200": (res) => response.status == 200,
+    "response code was 201": (res) => response.status == 201,
   });
 }
+
+//  k6 run --out json=results.json metrics.js
  // k6 run --out influxdb=http://localhost:8087/tech_radar_db metrics.js

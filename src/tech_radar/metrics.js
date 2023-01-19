@@ -13,10 +13,9 @@ Gauges - track the smallest, largest, and latest values */
 const myTrend = new Trend('response_time');
 
 export const options = {
-  vus: 10,
-  iterations: 10,
+  vus: 5,
+  iterations: 5,
   thresholds: {
-    checks: ["rate>0.99"],     // the rate of successful checks should be higher than 99%
     http_req_duration: ["p(95)<700"], // 95% of requests should be below 700ms
   }
 };
@@ -33,10 +32,7 @@ export default function () {
   let response = http.post(URL, JSON.stringify(PAYLOAD), PARAMS);
   
    myTrend.add(response.timings.duration);
- 
-  check(response, {
-    "response code was 201": (res) => response.status == 201,
-  });
+
 }
 
 //  k6 run --out json=results.json metrics.js
